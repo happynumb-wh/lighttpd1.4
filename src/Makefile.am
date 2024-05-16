@@ -79,6 +79,9 @@ src = server.c response.c connections.c h1.c \
 	data_config.c \
 	configfile.c configparser.c
 
+libdasics_dir = $(top_builddir)/LibDASICS
+libdasics_obj = $(top_builddir)/LibDASICS/build/libDASICS.a
+
 builtin_mods = \
   mod_rewrite.c \
   mod_redirect.c \
@@ -496,6 +499,7 @@ else
 lighttpd_SOURCES = $(src)
 lighttpd_CPPFLAGS = $(FAM_CFLAGS) $(LIBEV_CFLAGS)
 lighttpd_LDADD = $(common_libadd) $(PCRE_LIB) $(DL_LIB) $(SENDFILE_LIB) $(ATTR_LIB) $(CRYPTO_LIB) $(XXHASH_LIBS) $(FAM_LIBS) $(LIBEV_LIBS) $(LIBUNWIND_LIBS) $(WS2_32_LIB)
+
 lighttpd_LDFLAGS = -export-dynamic
 
 endif
