@@ -82,6 +82,13 @@ src = server.c response.c connections.c h1.c \
 libdasics_dir = $(top_builddir)/LibDASICS
 libdasics_obj = $(top_builddir)/LibDASICS/build/libDASICS.a
 
+$(libdasics_obj):
+	$(MAKE) -C $(libdasics_dir)
+
+libdasics_clean:
+	$(MAKE) -C $(libdasics_dir) clean
+
+
 builtin_mods = \
   mod_rewrite.c \
   mod_redirect.c \
@@ -498,9 +505,9 @@ else
 ## default lighttpd server
 lighttpd_SOURCES = $(src)
 lighttpd_CPPFLAGS = $(FAM_CFLAGS) $(LIBEV_CFLAGS)
-lighttpd_LDADD = $(common_libadd) $(PCRE_LIB) $(DL_LIB) $(SENDFILE_LIB) $(ATTR_LIB) $(CRYPTO_LIB) $(XXHASH_LIBS) $(FAM_LIBS) $(LIBEV_LIBS) $(LIBUNWIND_LIBS) $(WS2_32_LIB)
+lighttpd_LDADD = $(common_libadd) $(PCRE_LIB) $(DL_LIB) $(SENDFILE_LIB) $(ATTR_LIB) $(CRYPTO_LIB) $(XXHASH_LIBS) $(FAM_LIBS) $(LIBEV_LIBS) $(LIBUNWIND_LIBS) $(WS2_32_LIB)  $(libdasics_obj)
 
-lighttpd_LDFLAGS = -export-dynamic
+lighttpd_LDFLAGS = -export-dynamic  -T$(libdasics_dir)/ld.lds
 
 endif
 
@@ -535,6 +542,7 @@ t_test_mod_SOURCES = $(common_src) t/test_mod.c \
                      t/test_mod_userdir.c
 t_test_mod_CFLAGS  = $(AM_CFLAGS) $(LIBEV_CFLAGS)
 t_test_mod_LDADD   = $(LIBUNWIND_LIBS) $(PCRE_LIB) $(CRYPTO_LIB) $(DL_LIB) $(FAM_LIBS) $(LIBEV_LIBS) $(ATTR_LIB) $(WS2_32_LIB)
+
 
 noinst_HEADERS   = $(hdr)
 EXTRA_DIST = \

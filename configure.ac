@@ -59,6 +59,22 @@ AC_DEFUN([TRY_LDFLAGS],
   AC_LANG_POP([C])
 ])
 
+# Check for submodules
+AC_DEFUN([CHECK_SUBMODULES], [
+  AC_MSG_CHECKING([for git submodules])
+  if test -d "$srcdir/LibDASICS"; then
+    AC_MSG_RESULT([found])
+  else
+    AC_MSG_RESULT([not found])
+    AC_MSG_NOTICE([Initializing git submodules])
+    (cd $srcdir && git submodule update --init --recursive)
+  fi
+])
+
+# Add the custom macro to the configure script
+CHECK_SUBMODULES
+
+
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CC_C99
