@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "*.gdbinit": "c",
+        "utrap.h": "c",
+        "wait.h": "c"
     }
 }

@@ -83,7 +83,7 @@ int main(char * argc, const char * argv[],const char * envp[])
 
     exec_command("/bin/busybox ifconfig lo 127.0.0.1", envp, 1);
     exec_command("/bin/busybox route add -net 127.0.0.1 netmask 255.255.255.0 lo", envp, 1);
-    exec_command("/bin/lighttpd -f /bin/lighttpd.conf -dasics", envp, 0);
+    exec_command("/bin/lighttpd/lighttpd -f /bin/lighttpd/lighttpd.conf -m /bin/lighttpd/lib -dasics", envp, 0);
     sleep(2);
     exec_command("/bin/busybox ps -a", envp, 1);
     exec_command("/bin/busybox wget http://127.0.0.1:8080/hello.txt", envp, 1);

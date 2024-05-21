@@ -1,0 +1,180 @@
+================================================================================================
+++++++++++ 								  DASICS 								      ++++++++++
+================================================================================================
+
+
+[root@(lvna)=W]#./ab -t 60000 -c 50 -b 4096 -n 1000 https://127.0.0.1:443/
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        lighttpd/1.4.76-devel-lighttpd-1.4.76-3-gac00fdc6
+Server Hostname:        127.0.0.1
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.3,TLS_AES_256_GCM_SHA384,2048,256
+Server Temp Key:        X25519 253 bits
+
+Document Path:          /
+Document Length:        158 bytes
+
+Concurrency Level:      50
+Time taken for tests:   289.900 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      345000 bytes
+HTML transferred:       158000 bytes
+Requests per second:    3.45 [#/sec] (mean)
+Time per request:       14495.020 [ms] (mean)
+Time per request:       289.900 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.16 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      357 4004 1788.8   3800   12397
+Processing:   526 10396 2479.1  10495   14294
+Waiting:       31 10381 2478.2  10477   14261
+Total:        882 14400 1526.7  14435   22245
+
+Percentage of the requests served within a certain time (ms)
+  50%  14435
+  66%  14903
+  75%  15165
+  80%  15298
+  90%  15662
+  95%  15982
+  98%  18569
+  99%  19224
+ 100%  22245 (longest request)
+
+
+[root@(lvna)=W]#/httperf-install/bin/httperf --server=127.0.0.1 --port=443 --rat
+e=10 --ssl --num-conns=100
+httperf --client=0/1 --server=127.0.0.1 --port=443 --uri=/ --rate=10 --send-buffer=4096 --recv-buffer=16384 --ssl --ssl-protocol=auto --num-conns=100 --num-calls=1
+Maximum connect burst length: 2
+
+Total: connections 100 requests 100 replies 100 test-duration 42.408 s
+
+Connection rate: 2.4 conn/s (424.1 ms/conn, <=100 concurrent connections)
+Connection time [ms]: min 27641.0 avg 34961.3 max 42353.7 median 34841.5 stddev 4289.9
+Connection time [ms]: connect 13992.6
+Connection length [replies/conn]: 1.000
+
+Request rate: 2.4 req/s (424.1 ms/req)
+Request size [B]: 62.0
+
+Reply rate [replies/s]: min 0.0 avg 1.3 max 10.8 stddev 3.8 (8 samples)
+Reply time [ms]: response 20965.4 transfer 0.2
+Reply size [B]: header 168.0 content 158.0 footer 0.0 (total 326.0)
+Reply status: 1xx=0 2xx=0 3xx=0 4xx=100 5xx=0
+
+CPU time [s]: user 10.76 system 10.45 (user 25.4% system 24.6% total 50.0%)
+Net I/O: 0.9 KB/s (0.0*10^6 bps)
+
+Errors: total 0 client-timo 0 socket-timo 0 connrefused 0 connreset 0
+Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
+
+
+================================================================================================
+++++++++++ 								  NORMAL 								      ++++++++++
+================================================================================================
+
+
+[root@(lvna)=W]#./ab -t 60000 -c 50 -b 4096 -n 1000 https://127.0.0.1:443/
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        lighttpd/1.4.76-devel-lighttpd-1.4.76-3-gac00fdc6
+Server Hostname:        127.0.0.1
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.3,TLS_AES_256_GCM_SHA384,2048,256
+Server Temp Key:        X25519 253 bits
+
+Document Path:          /
+Document Length:        158 bytes
+
+Concurrency Level:      50
+Time taken for tests:   287.677 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      345000 bytes
+HTML transferred:       158000 bytes
+Requests per second:    3.48 [#/sec] (mean)
+Time per request:       14383.857 [ms] (mean)
+Time per request:       287.677 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.17 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      354 3971 1785.6   3753   12394
+Processing:   514 10321 2467.4  10421   14178
+Waiting:       28 10304 2464.4  10417   14157
+Total:        868 14292 1526.0  14322   22053
+
+Percentage of the requests served within a certain time (ms)
+  50%  14322
+  66%  14779
+  75%  15032
+  80%  15192
+  90%  15551
+  95%  15855
+  98%  18508
+  99%  19142
+ 100%  22053 (longest request)
+
+
+[root@(lvna)=W]#/httperf-install/bin/httperf --server=127.0.0.1 --port=443 --rat
+e=10 --ssl --num-conns=100
+httperf --client=0/1 --server=127.0.0.1 --port=443 --uri=/ --rate=10 --send-buffer=4096 --recv-buffer=16384 --ssl --ssl-protocol=auto --num-conns=100 --num-calls=1
+Maximum connect burst length: 2
+
+Total: connections 100 requests 100 replies 100 test-duration 42.148 s
+
+Connection rate: 2.4 conn/s (421.5 ms/conn, <=100 concurrent connections)
+Connection time [ms]: min 27779.3 avg 34864.1 max 42109.5 median 34757.5 stddev 4199.2
+Connection time [ms]: connect 14052.1
+Connection length [replies/conn]: 1.000
+
+Request rate: 2.4 req/s (421.5 ms/req)
+Request size [B]: 62.0
+
+Reply rate [replies/s]: min 0.0 avg 1.3 max 10.8 stddev 3.8 (8 samples)
+Reply time [ms]: response 20808.3 transfer 0.2
+Reply size [B]: header 168.0 content 158.0 footer 0.0 (total 326.0)
+Reply status: 1xx=0 2xx=0 3xx=0 4xx=100 5xx=0
+
+CPU time [s]: user 10.18 system 10.89 (user 24.2% system 25.8% total 50.0%)
+Net I/O: 0.9 KB/s (0.0*10^6 bps)
+
+Errors: total 0 client-timo 0 socket-timo 0 connrefused 0 connreset 0
+Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
