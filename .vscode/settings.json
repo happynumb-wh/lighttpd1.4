@@ -3,6 +3,8 @@
         "stdio.h": "c",
         "*.gdbinit": "c",
         "utrap.h": "c",
-        "wait.h": "c"
+        "wait.h": "c",
+        "log.h": "c",
+        "plugin.h": "c"
     }
 }
